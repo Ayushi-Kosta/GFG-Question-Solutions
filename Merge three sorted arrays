@@ -1,0 +1,90 @@
+//Problem link: https://practice.geeksforgeeks.org/problems/merge-three-sorted-arrays-1587115620/1
+//code:
+class Solution{
+  public:
+    // A, B, and C: input sorted arrays
+    //Function to merge three sorted vectors or arrays 
+    //into a single vector or array.
+    vector<int> mergeThree(vector<int>& a, vector<int>& b, vector<int>& c) 
+    { 
+        //Your code here
+        vector<int> d;
+        int i=0, j=0, k=0;
+        while(i<a.size() && j<b.size() && k<c.size()){
+            if(a[i]<b[j]){
+                if(a[i]<c[k]){
+                    d.push_back(a[i]);
+                    i++;
+                }
+                else{
+                    d.push_back(c[k]);
+                    k++;
+                }
+            }
+            else{
+                if(b[j]<c[k]){
+                    d.push_back(b[j]);
+                    j++;
+                }
+                else{
+                    d.push_back(c[k]);
+                    k++;
+                }
+            }
+        }
+        //a empty
+        if(i==a.size()){
+            while(k<c.size() && j<b.size()){
+                if(b[j]>c[k]){
+                    d.push_back(c[k]);
+                    k++;
+                }
+                else{
+                    d.push_back(b[j]);
+                    j++;
+                }
+            }
+        }
+        //b empty
+        else if(j==b.size()){
+            while(k<c.size() && i<a.size()){
+                if(a[i]>c[k]){
+                    d.push_back(c[k]);
+                    k++;
+                }
+                else{
+                    d.push_back(a[i]);
+                    i++;
+                }
+            }
+        }
+        //c empty
+        else if(k==c.size()){
+            while(j<b.size() && i<a.size()){
+                if(a[i]>b[j]){
+                    d.push_back(b[j]);
+                    j++;
+                }
+                else{
+                    d.push_back(a[i]);
+                    i++;
+                }
+            }
+        }
+        //remaining 
+        while(i<a.size()){
+            d.push_back(a[i]);
+            i++;
+        }
+        while(j<b.size()){
+            d.push_back(b[j]);
+            j++;
+        }
+        while(k<c.size()){
+            d.push_back(c[k]);
+            k++;
+        }
+        return d;
+    } 
+
+};
