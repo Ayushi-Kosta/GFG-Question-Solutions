@@ -1,0 +1,53 @@
+//Problem link: https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
+//code:
+class Solution{
+  public:
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    // Function to count inversions in the array.
+    long long int count(long long int a[],long long int l,long long int m, int r){
+        long long int n1=m-l+1, n2=r-m;
+        long long int left[n1], right[n2];
+        for(long long int i=0; i<n1; i++){
+            left[i]=a[l+i];
+            
+        }
+        for(long long int i=0; i<n2; i++){
+            right[i]=a[m+1+i];
+            
+        }
+        long long int res=0, i=0, j=0, k=l;
+        while(i<n1 && j<n2){
+            if(left[i]<=right[j]){
+                a[k++]=left[i++];
+            }
+            else{
+                a[k++]=right[j++];
+                res+=(n1-i);
+            }
+        }
+        while(i<n1){
+            a[k++]=left[i++];
+        }
+        while(j<n2){
+            a[k++]=right[j++];
+    }
+        return res;
+    }
+    
+    long long int c(long long int a[],long long int l,long long int r){
+        long long int res=0;
+        if(l<r){
+            long long int m=l+(r-l)/2;
+            res+=c(a, l, m);
+            res+=c(a, m+1, r);
+            res+=count(a, l, m, r);
+        }
+        return res;
+    }
+    
+    long long int inversionCount(long long a[], long long n)
+    {return c(a, 0, n-1);
+        // Your Code Here
+    }
+};
