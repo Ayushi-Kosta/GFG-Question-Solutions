@@ -1,0 +1,78 @@
+//Problem link: https://practice.geeksforgeeks.org/problems/cd61add036272faa69c6814e34aa7007d5a25aa6/1
+Code:
+int findK(vector<vector<int>> &a, int n, int m, int k)
+    {
+        // Your code goes here
+        long long top = 0; 
+        long long bottom = n-1;
+        long long left = 0;
+        long long right = m-1;
+        long long count = 1;
+        while(top<=bottom && left<=right)
+        {
+            for(long long i = left; i<=right; i++)
+            {
+                if(count==k)
+                {
+                    return a[top][i];
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            top++;
+            
+            if(top <= bottom)
+            {
+                for(long long i = top; i<=bottom; i++)
+                {
+                    if(count==k)
+                    {
+                        return a[i][right];
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                    right--;
+            }
+                
+                
+            if(left<=right)
+            {
+                for(long long i = right; i>=left; i--)
+                {
+                    if(count==k)
+                    {
+                        return a[bottom][i];
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                    bottom--;
+            }
+            if(top<=bottom)
+            {
+                for(long long i = bottom; i>=top; i--)
+                {
+                    if(count==k)
+                    {
+                        return a[i][left];
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                    left++;    
+            }
+                
+        }
+    }
+    
+
+};
